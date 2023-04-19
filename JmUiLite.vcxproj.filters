@@ -17,9 +17,6 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
-    <Filter Include="cmakelist">
-      <UniqueIdentifier>{a10d4b23-27e7-4ceb-9e30-e1bb75cda705}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\jmdrawhelper.h">
@@ -67,8 +64,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CMakeLists.txt">
-      <Filter>cmakelist</Filter>
+    <Text Include="CMakeLists.txt" />
+    <Text Include="include\CMakeLists.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="src\CMakeLists.txt">
+      <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
 </Project>

@@ -9,20 +9,19 @@ endif()
 # option(JmUiLite_ENABLE_TESTS "${PROJECT_NAME}: Enable tests" ${JmUiLite_STANDALONE_BUILD})
 option(JmUiLite_ENABLE_EXAMPLES "${PROJECT_NAME}: Enable examples" ${JmUiLite_STANDALONE_BUILD})
 
-option(BUILD_SHARED_LIBS "Build a dynamic JmUiLite library (default: on)" ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
+#option(BUILD_SHARED_LIBS "Build a dynamic JmUiLite library (default: on)" ON)
+set(CMAKE_INCLUDE_CURRENT_DIR OFF)
+set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE OFF)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
-set(JmUilite_BUILD_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/SRC)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(CMAKE_AUTOMOC TRUE)
-if(Not(Qt5_FOUND))
-	find_package(QT NAMES Qt5 COMPONENTS  core gui widgets xml REQUIRED)
+if(NOT "Qt5_FOUND")
+	find_package(QT NAMES Qt5 COMPONENTS core gui widgets xml REQUIRED)
 	find_package(Qt${QT_VERSION_MAJOR} COMPONENTS core gui widgets xml REQUIRED)
 	if(Qt5_FOUND)
 		message("Qt5 found.")
@@ -33,9 +32,9 @@ if(Not(Qt5_FOUND))
 	endif()
 endif()
 
-if(Qt${QT_VERSION_MAJOR}Core_VERSION VERSION_LESS ${QT_MIN_VERSION})
-	message(FATAL_ERROR "Minimum support Qt Version is ${QT_MIN_VEERSION}")
-endif()
+#if(${Qt5Core_VERSION} VERSION_LESS ${QT_MIN_VERSION})
+#	message(FATAL_ERROR "Minimum support Qt Version is ${QT_MIN_VEERSION}")
+#endif()
 
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME} )
 set(CMAKE_CXX_STANDARD 14)
@@ -70,27 +69,57 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
   set(CMAKE_DEBUG_POSTFIX _d)
 endif()
 
-add_subdirectory(include)
-add_subdirectory(src)
+#设置头文件
+set(JmUiLite_HEADERS
+	include/jmdrawhelper.h
+	include/jmmovewidget.h
+	include/jmshadowframebase.h
+	include/jmskinloader.h
+	include/jmuilite.h
+	include/jmuilite_global.h
+	include/jmwidgetbase.h
+)
+
+#设置源文件
+set(JmUiLite_SOURCES
+	src/jmdrawhelper.cpp
+	src/jmmovewidget.cpp
+	src/jmshadowframebase.cpp
+	src/jmskinloader.cpp
+	src/jmuilite.cpp
+	src/jmwidgetbase.cpp
+)
 
 if (JmUiLite_ENABLE_EXAMPLES)
 	add_subdirectory(examples)
 endif()
 
-ADD_LIBRARY(SHARED)
+#设置输出路径
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-set(UILite_SOURCES
-    JmUiLite/jmdrawhelper.cpp
-	JmUiLite/jmdrawhelper.h
-	JmUiLite/jmmovewidget.cpp
-	JmUiLite/jmmovewidget.h
-	JmUiLite/jmshadowframebase.cpp
-	JmUiLite/jmshadowframebase.h
-	JmUiLite/jmskinloader.cpp
-	JmUiLite/jmskinloader.h
-	JmUiLite/jmuilite.cpp
-	JmUiLite/jmuilite.h
-	JmUiLite/jmuilite_global.h
-	JmUiLite/jmwidgetbase.cpp
-	JmUiLite/jmwidgetbase.h
+#set_property(TARGET PROPERTY IMPORTED_IMPLIB ${CMAKE_BINARY_DIR}/lib)
+
+
+if(NOT BUILD_SHARED_LIBS)
+	add_library(JmUiLite STATIC ${JmUiLite_HEADERS} ${JmUiLite_SOURCES})
+else()
+	add_library(JmUiLite SHARED ${JmUiLite_HEADERS} ${JmUiLite_SOURCES})
+endif()
+
+
+#设置预处理器
+target_compile_definitions(JmUiLite PRIVATE -DJMUILITE_LIB)
+
+#target_include_directories(JmUiLite
+#          PUBLIC
+#              $<TARGET_PROPERTY:Qt::Core,INTERFACE_INCLUDE_DIRECTORIES>
+#    )
+
+#设置Qt的链接库
+target_link_libraries(JmUiLite
+	PRIVATE
+		Qt${QT_VERSION_MAJOR}::Core
+		Qt${QT_VERSION_MAJOR}::Gui
+		Qt${QT_VERSION_MAJOR}::Widgets
+		Qt${QT_VERSION_MAJOR}::Xml
 )

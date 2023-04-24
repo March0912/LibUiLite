@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resource relativePath="res">
+	<icon type="svg">
+		<path path=":/icons_svg/16x16"/>
+		<path path=":/icons_svg/24x24"/>
+		<path path=":/icons_svg/48x48"/>
+		<path path=":/icons_svg/other"/>
+	</icon>
+</resource>
+<theme name="dark">
+	<style class="JmShadowFramebase" base="" note="带阴影边框的基类">
+		<color name="shadow" value="#2D2D2D"/>
+		<hint name="shadowWidth" value="8"/>
+		<hint name="roundness" value="8"/>
+	</style>
+	<style class="DefaultCenterWidget" base="" note="默认的中央区部件">
+		<color name="background" value="#333333"/>
+	</style>
+</theme>
+<theme name="white">
+	<style class="JmShadowFramebase" base="" note="带阴影边框的基类">
+		<color name="shadow" value="#CCCCCC"/>
+		<hint name="shadowWidth" value="8"/>
+		<hint name="roundness" value="8"/>
+	</style>
+	<style class="DefaultCenterWidget" base="" note="默认的中央区部件">
+		<color name="background" value="#EEEEEE"/>
+	</style>
+</theme>

@@ -129,6 +129,20 @@ endif()
 
 #设置输出路径
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+message(STATUS "runtime output dir: " ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+if(CMAKE_BUILD_TYPE STREQUAL "")
+    set(CMAKE_BUILD_TYPE Debug)
+endif()
+message(STATUS "build type: " ${CMAKE_BUILD_TYPE})
+
+set(OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE})
+message(STATUS "binary output dir: " ${OUTPUT_DIR})
+
+set(CONFIG_DIR ${OUTPUT_DIR}/config)
+message(STATUS "binary config dir: " ${CONFIG_DIR})
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config/theme/jmtheme.sk DESTINATION ${CONFIG_DIR}/theme/)
 
 if(NOT BUILD_SHARED_LIBS)
 	add_library(${PROJECT_NAME} STATIC ${MY_HEADERS} ${MY_SOURCES})
@@ -142,7 +156,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE -DJMUILITE_LIB)
 #引入库目录路径
 set(THIRD_PATH "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty")
 #link_directories(${THIRD_PATH}/lib ${THIRD_PATH}/opencv/lib)
-message(STATUS "set thirdparty path: " ${THIRD_PATH})
+message(STATUS "thirdparty path: " ${THIRD_PATH})
 
 if(OPENCV_ENABLE)
 	set(OpenCV_Dir ${THIRD_PATH}/opencv)

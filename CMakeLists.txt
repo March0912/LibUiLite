@@ -9,7 +9,11 @@ endif()
 # option(JmUiLite_ENABLE_TESTS "${PROJECT_NAME}: Enable tests" ${JmUiLite_STANDALONE_BUILD})
 option(JmUiLite_ENABLE_EXAMPLES "${PROJECT_NAME}: Enable examples" ${JmUiLite_STANDALONE_BUILD})
 
+set(OPENCV_ENABLE OFF)
+
 option(BUILD_SHARED_LIBS "Build a dynamic JmUiLite library (default: on)" ON)
+
+
 set(CMAKE_INCLUDE_CURRENT_DIR OFF)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE OFF)
 
@@ -140,22 +144,26 @@ set(THIRD_PATH "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty")
 #link_directories(${THIRD_PATH}/lib ${THIRD_PATH}/opencv/lib)
 message(STATUS "set thirdparty path: " ${THIRD_PATH})
 
-set(OpenCV_Dir ${THIRD_PATH}/opencv)
+if(OPENCV_ENABLE)
+	set(OpenCV_Dir ${THIRD_PATH}/opencv)
 
-#引入库目录头文件
-include_directories(
-		 ${OpenCV_Dir}/include/opencv
-		 ${OpenCV_Dir}/include/opencv2
- )
+	#引入库目录头文件
+	include_directories(
+			 ${OpenCV_Dir}/include/opencv
+			 ${OpenCV_Dir}/include/opencv2
+	 )
 
-#链接opencv开发库
-target_link_libraries(${PROJECT_NAME}
-	PRIVATE
-		debug ${OpenCV_Dir}/lib/Debug/opencv_core2413d.lib			optimized ${OpenCV_Dir}/lib/Release/opencv_core2413.lib
-		debug ${OpenCV_Dir}/lib/Debug/opencv_imgproc2413d.lib		optimized ${OpenCV_Dir}/lib/Release/opencv_imgproc2413.lib					
-		debug ${OpenCV_Dir}/lib/Debug/opencv_highgui2413d.lib		optimized ${OpenCV_Dir}/lib/Release/opencv_highgui2413.lib
-		debug ${OpenCV_Dir}/lib/Debug/opencv_calib3d2413d.lib		optimized ${OpenCV_Dir}/lib/Release/opencv_calib3d2413.lib
-)
+	#链接opencv开发库
+	target_link_libraries(${PROJECT_NAME}
+		PRIVATE
+			debug ${OpenCV_Dir}/lib/Debug/opencv_core2413d.lib			optimized ${OpenCV_Dir}/lib/Release/opencv_core2413.lib
+			debug ${OpenCV_Dir}/lib/Debug/opencv_imgproc2413d.lib		optimized ${OpenCV_Dir}/lib/Release/opencv_imgproc2413.lib					
+			debug ${OpenCV_Dir}/lib/Debug/opencv_highgui2413d.lib		optimized ${OpenCV_Dir}/lib/Release/opencv_highgui2413.lib
+			debug ${OpenCV_Dir}/lib/Debug/opencv_calib3d2413d.lib		optimized ${OpenCV_Dir}/lib/Release/opencv_calib3d2413.lib
+	)
+
+endif()
+
 
 #设置Qt的链接库
 target_link_libraries(${PROJECT_NAME}

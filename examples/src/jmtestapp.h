@@ -5,10 +5,10 @@
 
 class QKeyEvent;
 
-class JmTestApp : public JmWidgetBase
+class JmTestApp : public UiLite::JmWidgetBase
 {
     Q_OBJECT
-	using _BaseClass = JmWidgetBase;
+	using _BaseClass = UiLite::JmWidgetBase;
 
 public:
     JmTestApp(QWidget *parent = Q_NULLPTR);

@@ -88,16 +88,19 @@ set(MY_HEADERS
 	include/jmuilite.h
 	include/jmuilite_global.h
 	include/jmwidgetbase.h
+	include/jmiconbutton.h
 )
 
 #设置源文件
 set(MY_SOURCES
+	res/jmuilite.qrc
 	src/jmdrawhelper.cpp
 	src/jmmovewidget.cpp
 	src/jmshadowframebase.cpp
 	src/jmskinloader.cpp
 	src/jmuilite.cpp
 	src/jmwidgetbase.cpp
+	src/jmiconbutton.cpp
 )
 
 FILE(GLOB_RECURSE RESOURCE_FILES "*.qrc")
@@ -139,10 +142,10 @@ message(STATUS "build type: " ${CMAKE_BUILD_TYPE})
 set(OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE})
 message(STATUS "binary output dir: " ${OUTPUT_DIR})
 
-set(CONFIG_DIR ${OUTPUT_DIR}/config)
-message(STATUS "binary config dir: " ${CONFIG_DIR})
+set(RES_DIR ${OUTPUT_DIR}/res)
+message(STATUS "binary config dir: " ${RES_DIR})
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config/theme/jmtheme.sk DESTINATION ${CONFIG_DIR}/theme/)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/res/theme/jmtheme.sk DESTINATION ${RES_DIR}/theme/)
 
 if(NOT BUILD_SHARED_LIBS)
 	add_library(${PROJECT_NAME} STATIC ${MY_HEADERS} ${MY_SOURCES})

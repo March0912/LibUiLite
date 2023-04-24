@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <defs>
+    <linearGradient id="filelist_folder_click-a" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#608DFA"/>
+      <stop offset="100%" stop-color="#417FF9"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#filelist_folder_click-a)" d="M-1.15463195e-13,2 C-1.1553083e-13,1.44771525 0.44771525,1 1,1 L4.33333333,1 C4.60279846,1 4.82720947,1.10099792 5,1.32665146 L6.051,3.008 L15,3.0087894 C15.5522847,3.0087894 16,3.45650466 16,4.0087894 L16,14 C16,14.5522847 15.5522847,15 15,15 L1,15 C0.44771525,15 1.11978116e-13,14.5522847 1.11910481e-13,14 L-1.15463195e-13,2 Z"/>
+</svg>

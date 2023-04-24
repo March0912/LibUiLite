@@ -5,43 +5,47 @@
 #include <QColor>
 #include <QRect>
 
-class JMUILITE_EXPORT JmShadowFramebase : public JmMoveWidget
+namespace UiLite 
 {
-	Q_OBJECT
-		using _BaseClass = JmMoveWidget;
 
-public:
-	explicit JmShadowFramebase(QWidget* parent = nullptr);
-	~JmShadowFramebase() = default;
+	class JMUILITE_EXPORT JmShadowFramebase : public JmMoveWidget
+	{
+		Q_OBJECT
+			using _BaseClass = JmMoveWidget;
 
-public:
-	void setShadowWidth(int width);
-	int getShadowWidth() const;
+	public:
+		explicit JmShadowFramebase(QWidget* parent = nullptr);
+		~JmShadowFramebase() = default;
 
-	void setShadowColor(const QColor& color);
-	QColor getShadowColor() const;
+	public:
+		void setShadowWidth(int width);
+		int getShadowWidth() const;
 
-	void setRoundness(int roundness);
-	int getRoundness() const;
+		void setShadowColor(const QColor& color);
+		QColor getShadowColor() const;
 
-	QRect leftShadowRect() const;
-	QRect rightShadowRect() const;
-	QRect topShadowRect() const;
-	QRect bottomShadowRect() const;
+		void setRoundness(int roundness);
+		int getRoundness() const;
 
-	bool ptInShadow(QPoint pt) const;
+		QRect leftShadowRect() const;
+		QRect rightShadowRect() const;
+		QRect topShadowRect() const;
+		QRect bottomShadowRect() const;
 
-private:
-	void initUI();
+		bool ptInShadow(QPoint pt) const;
 
-protected:
-	int m_shadowWidth = 8;
-	QColor m_shadowColor = QColor(45, 45, 45, 50);
-	int m_roundness = 8;
+	private:
+		void initUI();
 
-protected:
-	void paintEvent(QPaintEvent* event) override;
-};
+	protected:
+		int m_shadowWidth = 8;
+		QColor m_shadowColor = QColor(45, 45, 45, 50);
+		int m_roundness = 8;
 
+	protected:
+		void paintEvent(QPaintEvent* event) override;
+	};
+
+}
 
 #endif // __JMSHADOWFRAMEBASE_H__

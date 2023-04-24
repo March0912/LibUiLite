@@ -8,6 +8,9 @@ set(CMAKE_AUTOUIC ON)
 
 set(AppName JmTestApp)
 
+set(CMAKE_CXX_STANDARD 17)
+
+
 set(MY_SOURCES 
 	src/jmtestapp.ui
 	src/jmtestapp.qrc

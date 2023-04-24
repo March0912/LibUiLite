@@ -14,9 +14,9 @@ JmShadowFramebase::JmShadowFramebase(QWidget* parent /*= nullptr*/) : _BaseClass
 	this->setAttribute(Qt::WA_TranslucentBackground);
 
 	QString theme = "dark";// JmSetting->isDarkTheme() ? "dark" : "light";
-	m_shadowColor = JmDrawHelper::getThemeColor(theme, metaObject()->className(), "shadow", m_shadowColor);
-	m_shadowWidth = JmDrawHelper::getThemeHint(theme, metaObject()->className(), "shadowWidth", m_shadowWidth);
-	m_roundness = JmDrawHelper::getThemeHint(theme, metaObject()->className(), "roundness", m_roundness);
+	m_shadowColor = JmSkin::getThemeColor(theme, metaObject()->className(), "shadow", m_shadowColor);
+	m_shadowWidth = JmSkin::getThemeHint(theme, metaObject()->className(), "shadowWidth", m_shadowWidth);
+	m_roundness = JmSkin::getThemeHint(theme, metaObject()->className(), "roundness", m_roundness);
 
 	initUI();
 }

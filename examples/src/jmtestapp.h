@@ -1,16 +1,18 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
-// #include "ui_jmtestapp.h"
 #include "jmwidgetbase.h"
+
+class QKeyEvent;
 
 class JmTestApp : public JmWidgetBase
 {
     Q_OBJECT
+	using _BaseClass = JmWidgetBase;
 
 public:
     JmTestApp(QWidget *parent = Q_NULLPTR);
 
-private:
-//     Ui::JmTestAppClass ui;
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 };

@@ -4,7 +4,7 @@
 #include "jmuilite_global.h"
 #include <QColor>
 
-namespace JmDrawHelper
+namespace JmSkin
 {
 	JMUILITE_EXPORT extern QColor getThemeColor(const QString& themeName, const QString& className, const QString& propName, const QColor& def = QColor());
 	JMUILITE_EXPORT extern int getThemeHint(const QString& themeName, const QString& className, const QString& propName, int def = 0);

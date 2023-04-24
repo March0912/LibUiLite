@@ -65,7 +65,7 @@ void DefaultCenterWidget::paintEvent(QPaintEvent* event)
 
 	QString theme = "dark";// JmSetting->isDarkTheme() ? "dark" : "light";
 
-	QColor color = JmDrawHelper::getThemeColor(theme, metaObject()->className(), "shadow", m_pParent ? m_pParent->getShadowColor() : QColor(51, 51, 51, 255));
+	QColor color = JmSkin::getThemeColor(theme, metaObject()->className(), "shadow", m_pParent ? m_pParent->getShadowColor() : QColor(51, 51, 51, 255));
 	color.setAlpha(255);
 
 	QBrush brush(color);
